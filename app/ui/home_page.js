@@ -26,8 +26,8 @@ export function HomePage({switchProductPage, switchHomePage, switchListingPage, 
         </div>
       </div>
 
-      <div className="bg-white h-max mx-10 rounded-lg flex flex-col">
-        <div className="grid grid-cols-7 gap-4 m-10">
+      <div className="bg-white h-max mx-10 rounded-lg flex flex-none flex-col">
+        <div className="flex flex-none gap-4 m-10">
           {list_of_products.map((product) => (
             <div key={product.id}>
               <Product product_name={product.name} product_description={product.description} product_price={product.price} switchProductPage={switchProductPage}/>
@@ -62,7 +62,7 @@ export function HomePage({switchProductPage, switchHomePage, switchListingPage, 
       </div>
 
       <div className="bg-white h-max mx-10 rounded-lg flex flex-col">
-        <div className="grid grid-cols-7 gap-4 m-10">
+        <div className="flex flex-none flex-wrap gap-24 m-10">
           {list_of_products.map((product) => (
             <div key={product.id}>
               <Product product_name={product.name} product_description={product.description} product_price={product.price} switchProductPage={switchProductPage} />
