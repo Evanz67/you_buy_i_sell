@@ -1,6 +1,6 @@
 
 
-export function ProductPage({name, description, price, switchHomePage, user, signIn, logout, switchListingPage}) {
+export function ProductPage({name, description, price, switchHomePage, user, signIn, logout, switchListingPage, switchProfilePage}) {
 
   if (user === null) {
     return (
@@ -60,7 +60,7 @@ export function ProductPage({name, description, price, switchHomePage, user, sig
       </div>
         
         <div className="pr-12 space-x-4">
-          <button className="border-2 border-teal-400 text-white p-2 bg-teal-400 rounded-lg">Profile</button>
+          <button onClick={switchProfilePage} className="border-2 border-teal-400 text-white p-2 bg-teal-400 rounded-lg">Profile</button>
           <button onClick={logout} className="border-2 border-teal-400 text-white p-2 bg-teal-400 rounded-lg">Logout</button>
         </div>
       </div>

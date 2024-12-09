@@ -2,6 +2,7 @@
 import { HomePage } from "./home_page";
 import { ProductPage } from "./product_page";
 import { ListingPage } from "./listing_page";
+import { ProfilePage } from "./profile_page";
 import { useState, useEffect } from "react";
 import { getDataUser, addData, getData } from "../utility/database";
 
@@ -27,6 +28,10 @@ export function Main({signIn, user, logout}) {
     setPage('listing');
   }
 
+  function switchProfilePage() {
+    setPage('profile');
+  }
+
   function addProduct(productAdded) {
     const addedData = addData(productAdded);
     const addedDataId = {...productAdded, id: addedData};
@@ -46,19 +51,25 @@ export function Main({signIn, user, logout}) {
   function ShowPage() {
     if (page === 'home') {
       return (
-        <HomePage switchProductPage={switchProductPage} switchHomePage={switchHomePage} switchListingPage={switchListingPage} signIn={signIn} user={user} logout={logout} list_of_products={product} />
+        <HomePage switchProductPage={switchProductPage} switchHomePage={switchHomePage} switchListingPage={switchListingPage} switchProfilePage={switchProfilePage} signIn={signIn} user={user} logout={logout} list_of_products={product} />
       );
     };
 
     if (page === 'product') {
       return (
-        <ProductPage name={name} description={description} price={price} switchHomePage={switchHomePage} user={user} signIn={signIn} logout={logout} switchListingPage={switchListingPage} />
+        <ProductPage name={name} description={description} price={price} switchHomePage={switchHomePage} user={user} signIn={signIn} logout={logout} switchListingPage={switchListingPage} switchProfilePage={switchProfilePage} />
       );
     };
 
     if (page === 'listing') {
       return (
         <ListingPage switchHomePage={switchHomePage} addProduct={addProduct} />
+      );
+    };
+
+    if (page === 'profile') {
+      return (
+        <ProfilePage switchHomePage={switchHomePage} user={user} />
       );
     };
   }
