@@ -1,3 +1,6 @@
+"use client";
+import { useState } from 'react';
+
 function Product({product_name, product_description, product_price, switchProductPage}) {
 
     return (
@@ -6,6 +9,14 @@ function Product({product_name, product_description, product_price, switchProduc
   }
 
 export function HomePage({switchProductPage, switchHomePage, switchListingPage, switchProfilePage, signIn, user, logout, list_of_products}) {
+
+  const [search, setSearch] = useState('');
+  const searchedProducts = list_of_products.filter((product) => product.name.toLowerCase() === search.toLowerCase());
+  const productResult = searchedProducts.length > 0 ? searchedProducts : list_of_products;
+
+  function searchProduct(event) {
+    setSearch(event.target.value);
+  }
 
   if (user === null) {
     return (
@@ -17,7 +28,9 @@ export function HomePage({switchProductPage, switchHomePage, switchListingPage, 
           </div>
           <div className="border-2 border-teal-400 h-10 min-w-96 w-8/12 rounded-3xl flex flex-none">
             <img src="/search_icon.png" alt="search_icon" className="w-6 h-6 mt-1.5 ml-3" />
-            <input type="text" placeholder="Search" className="text-neutral-950 ml-3 pl-1 w-10/12 focus:outline-none"></input> 
+            <form className="w-10/12">
+              <input type="text" placeholder="Search" onChange={searchProduct} className="text-neutral-950 ml-3 pl-1 mt-1.5 w-10/12 focus:outline-none"></input> 
+            </form>  
           </div>
         </div>
         
@@ -28,7 +41,7 @@ export function HomePage({switchProductPage, switchHomePage, switchListingPage, 
 
       <div className="bg-white h-max mx-10 rounded-lg flex flex-none flex-col">
         <div className="flex flex-none flex-wrap gap-24 m-10">
-          {list_of_products.map((product) => (
+          {productResult.map((product) => (
             <div key={product.id}>
               <Product product_name={product.name} product_description={product.description} product_price={product.price} switchProductPage={switchProductPage}/>
             </div>
@@ -48,7 +61,9 @@ export function HomePage({switchProductPage, switchHomePage, switchListingPage, 
         </div>
         <div className="border-2 border-teal-400 h-10 min-w-96 w-8/12 rounded-3xl flex flex-none">
           <img src="/search_icon.png" alt="search_icon" className="w-6 h-6 mt-1.5 ml-3" />
-          <input type="text" placeholder="Search" className="text-neutral-950 ml-3 pl-1 w-10/12 focus:outline-none"></input> 
+          <form className="w-10/12">
+            <input type="text" placeholder="Search" onChange={searchProduct} className="text-neutral-950 ml-3 pl-1 mt-1.5 w-10/12 focus:outline-none"></input> 
+          </form> 
         </div>
         <div>
           <button onClick={switchListingPage} className="border-2 border-teal-400 text-white p-2 bg-teal-400 rounded-lg">Add Listing</button>
@@ -63,7 +78,7 @@ export function HomePage({switchProductPage, switchHomePage, switchListingPage, 
 
       <div className="bg-white h-max mx-10 rounded-lg flex flex-none flex-col">
         <div className="flex flex-none flex-wrap gap-24 m-10">
-          {list_of_products.map((product) => (
+          {productResult.map((product) => (
             <div key={product.id}>
               <Product product_name={product.name} product_description={product.description} product_price={product.price} switchProductPage={switchProductPage} />
             </div>

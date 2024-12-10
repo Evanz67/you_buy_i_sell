@@ -38,6 +38,7 @@ export function Main({signIn, user, logout}) {
     setProduct((oldProduct) => [...oldProduct, addedDataId]);
   }
 
+
   async function generateMerchandise() {
     
     try {
